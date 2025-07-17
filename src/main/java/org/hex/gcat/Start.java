@@ -28,8 +28,8 @@ public class Start {
 
     public static void main(String[] args) throws IOException {
         //DEBUG
-        System.setProperty("proxyHost", "127.0.0.1");
-        System.setProperty("proxyPort", "7890");
+        //System.setProperty("proxyHost", "127.0.0.1");
+        //System.setProperty("proxyPort", "7890");
         if (!Config.isConfigExist()){
             Config.makeConfig();
             Config.writeConfig(Config.DEAFULT_CONFIG());
