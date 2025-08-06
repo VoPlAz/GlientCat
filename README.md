@@ -53,7 +53,7 @@
       <li>基础扫描命令:
             <pre>python sqlmap.py -u target --batch</pre>
         </li>
-        <li>默认扫描命令:
+        <li>内置默认扫描命令:
             <pre>python sqlmap.py -u target --batch --random-agent --crawl=2 --forms</pre>
         </li>
     </ul>
