@@ -82,7 +82,7 @@ public class SQLScanner implements Runnable {
                    while (matcher.find()) {
                        types+="· " + matcher.group(1)+"\n";
                    }
-                   Start.bot.execute(new SendDocument(Start.ownerID, file).caption("0x6763636174\\nFound SQL Injection Point Successfully\\nURL: \" + target+\"\\n\"+types"));
+                   Start.bot.execute(new SendDocument(Start.ownerID, file).caption("0x6763636174\nFound SQL Injection Point Successfully\nURL: \"" +target+"\"\n"+types));
                    file.delete();
                } else if (output.toString().contains("can't establish SSL connection")) {
                    Start.bot.execute(new SendMessage(Start.ownerID,"Cannt establish SSL Connection\nURL: "+target));
@@ -103,3 +103,4 @@ public class SQLScanner implements Runnable {
    }
 
 }
+
