@@ -11,13 +11,13 @@ import com.pengrad.telegrambot.response.GetFileResponse;
 import org.hex.gcat.utils.Config;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class Start {
     static TelegramBot bot = null;
@@ -33,6 +33,7 @@ public class Start {
         if (!Config.isConfigExist()){
             Config.makeConfig();
             Config.writeConfig(Config.DEAFULT_CONFIG());
+            extractSqlmap();
             System.out.println("Initialization successful. Please modify the configuration file config.json and restart !");
             System.exit(0);
         }else {
@@ -89,6 +90,9 @@ public class Start {
                             }
                             bot.execute(new SendMessage(id,"Remain Targets:"+SQLScanner.targets.size()+"\nScanning: "+scanning));
                             break;
+                        case "/help":
+                            bot.execute(new SendMessage(id,"Usable commands:\n/threads \n/targets"));
+                            break;
                     }
                 }
             }
@@ -102,6 +106,45 @@ public class Start {
             }
         });
     }
+    public static void extractSqlmap() throws IOException {
+        InputStream is = Start.class.getClassLoader().getResourceAsStream("sqlmap-master.zip");
+        byte[] zipdata = readInputStream(is);
+        is.close();
+        File file = new File("sqlmap-master.zip");
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        fileOutputStream.write(zipdata);
+        fileOutputStream.close();
+        unzip(file.getPath(),System.getProperty("user.dir"));
+        file.delete();
+    }
+    public static void unzip(String zipFilePath, String destDir) throws IOException {
+        byte[] buffer = new byte[1024];
+        ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(zipFilePath));
+        ZipEntry zipEntry = zipInputStream.getNextEntry();
+
+        while (zipEntry != null) {
+            String fileName = zipEntry.getName().replace("sqlmap-master","");
+            String filePath = destDir + File.separator + fileName;
+            
+            if (zipEntry.isDirectory()) {
+                File dir = new File(filePath);
+                dir.mkdirs();
+            } else {
+                //Extract file
+                FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+                int length;
+                while ((length = zipInputStream.read(buffer)) > 0) {
+                    fileOutputStream.write(buffer, 0, length);
+                }
+                fileOutputStream.close();
+            }
+
+            zipEntry = zipInputStream.getNextEntry();
+        }
+
+        zipInputStream.closeEntry();
+        zipInputStream.close();
+    }
     public static int countActiveThreadsSimple() {
         Map<Thread, StackTraceElement[]> allThreads = Thread.getAllStackTraces();
         int activeCount = 0;
@@ -113,6 +156,16 @@ public class Start {
         }
 
         return activeCount;
+    }
+    private static byte[] readInputStream(InputStream in) {
+        byte[] bytes = null;
+        try {
+            DataInputStream dataInputStream = new DataInputStream(in);
+            bytes = new byte[dataInputStream.available()];
+            dataInputStream.readFully(bytes);
+        } catch (Exception e) {
+        }
+        return bytes;
     }
 
     private static String handleDocument(TelegramBot bot, Update update) {
