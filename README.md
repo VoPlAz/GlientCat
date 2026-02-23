@@ -2,7 +2,8 @@
 
 <p align="right">
   <a href="#english">English</a> | 
-  <a href="#chinese">中文</a>
+  <a href="#chinese">中文</a> |
+  <a href="screenshot">截图 / Screenshot</a>
 </p>
 
 <div align="center">
@@ -35,7 +36,7 @@
     </ul>
     <h2>🚀 快速开始</h2>
     <ol>
-        <li>下载Sqlmap并将GlientCat.jar放入其目录</li>
+        <li>创建一个空白文件夹并将GlientCat.jar放入</li>
         <li>运行: <code>java -jar GlientCat.jar</code></li>
         <li>配置<code>config.json</code>:
             <pre>{
@@ -45,7 +46,8 @@
 }</pre>
         </li>
       <li>再次运行，若配置无误即可正常启动</li>
-        <li>使用<code>/start</code>命令开始与机器人的会话</li>
+        <li>使用<code>/start</code>命令与<code>/help</code>开始与机器人的会话</li>
+      <li>投喂含网址列表的.txt（一行一条）即可开始扫描</li>
     </ol>
     <h2>⚙️ 配置说明</h2>
     <ul>
@@ -53,14 +55,14 @@
       <li>基础扫描命令:
             <pre>python sqlmap.py -u target --batch</pre>
         </li>
-        <li>内置默认扫描命令:
+        <li>默认扫描命令:
             <pre>python sqlmap.py -u target --batch --random-agent --crawl=2 --forms</pre>
         </li>
     </ul>
     <h2>📌 注意事项</h2>
     <ul>
         <li>妥善保管你的机器人令牌!</li>
-        <li>扫描前需先用<code>/start</code>命令初始化会话，否则扫描数据无法返回</li>
+        <li>扫描前需先用<code>/start</code>命令初始化会话，否则扫描结果无法回传</li>
         <li>Linux服务器可参考<code>nohup</code>运行</li>
     </ul>
 
@@ -81,22 +83,23 @@
     </ul>
     <h2>🚀 Quick Start</h2>
     <ol>
-        <li>Download Sqlmap and place GlientCat.jar in its directory</li>
+        <li>Create an empty folder and place <code>GlientCat.jar</code> inside it.</li>
         <li>Run: <code>java -jar GlientCat.jar</code></li>
-        <li>Configure <code>config.json</code>:
+        <li>Configure the generated <code>config.json</code>:
             <pre>{
     "ownerID": "YOUR_TELEGRAM_ID",
     "botToken": "YOUR_BOT_TOKEN",
     "sqlPM": "null"
 }</pre>
         </li>
-        <li>Run again - the program will start normally if configuration is correct</li>
-        <li>Initiate conversation with <code>/start</code> command</li>
+      <li>Run the program again. If the configuration is correct, it will start successfully.</li>
+        <li>Start a conversation with your bot using the <code>/start</code> command, and use <code>/help</code> to see available commands.</li>
+      <li>To begin scanning, send a <code>.txt</code> file containing a list of targets (one URL per line).</li>
     </ol>
     <h2>⚙️ Configuration</h2>
     <ul>
-        <li><code>sqlPM</code>: Optional, Sqlmap parameters (appended to base command)</li>
-        <li>Base scan command:
+        <li><code>sqlPM</code>: Optional. Sqlmap parameters (appended to the base command).</li>
+      <li>Base scan command:
             <pre>python sqlmap.py -u target --batch</pre>
         </li>
         <li>Default scan command:
@@ -106,6 +109,9 @@
     <h2>📌 Important Notes</h2>
     <ul>
         <li>Keep your bot token secure!</li>
-        <li>You must initiate the session with <code>/start</code> before scanning, otherwise scan data won't be returned</li>
-        <li>For Linux servers, consider running with <code>nohup</code></li>
+        <li>You must initiate the session with the <code>/start</code> command before scanning; otherwise, scan results cannot be sent back to you.</li>
+        <li>For Linux servers, consider running the program in the background using <code>nohup</code>.</li>
     </ul>
+    <div id="screenshot"></div>
+    <h1>截图 / Screenshot</h1>
+    <img src="screenshot.png">
