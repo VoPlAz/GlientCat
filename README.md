@@ -3,7 +3,7 @@
 <p align="right">
   <a href="#english">English</a> | 
   <a href="#chinese">中文</a> |
-  <a href="screenshot">截图 / Screenshot</a>
+  <a href="#screenshot">截图 / Screenshot</a>
 </p>
 
 <div align="center">
